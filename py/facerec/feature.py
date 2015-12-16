@@ -113,7 +113,7 @@ class LDA(AbstractFeature):
         y = np.asarray(y)
         # calculate dimensions
         d = XC.shape[0]
-        c = len(np.unique(y))        
+        c = len(np.unique(y))
         # set a valid number of components
         if self._num_components <= 0:
             self._num_components = c-1
@@ -124,7 +124,7 @@ class LDA(AbstractFeature):
         # calculate the within and between scatter matrices
         Sw = np.zeros((d, d), dtype=np.float32)
         Sb = np.zeros((d, d), dtype=np.float32)
-        for i in range(0,c):
+        for i in np.unique(y):
             Xi = XC[:,np.where(y==i)[0]]
             meanClass = np.mean(Xi, axis = 1).reshape(-1,1)
             Sw = Sw + np.dot((Xi-meanClass), (Xi-meanClass).T)
